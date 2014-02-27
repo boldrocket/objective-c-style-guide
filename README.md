@@ -17,19 +17,19 @@ The guide does not aim to define an applications architecture or any implementat
 * [NSBlog](https://www.mikeash.com/pyblog/)
 
 ## Table of Contents
-* [Xcode Project](#Xcode Project)
-* [Header Organisation](#Header Organisation)
-* [Implementation Organisation](#Implementation Organisation)
-* [Types](#Types)
-* [Variables](#Variables)
-* [Classes and Methods](#Classes and Methods)
-* [Properties](#Properties)
-* [Delegates](#Delegates)
-* [Localisation](#Localisation)
-* [Constants](#Constants)
-* [Initialization](#Initialization)
-* [Conditionals](#Conditionals)
-* [Future Revisions](#Future Revisions)
+* [Xcode Project](#xcode-project)
+* [Header Organisation](#header-organisation)
+* [Implementation Organisation](#implementation-organisation)
+* [Types](#types)
+* [Variables](#variables)
+* [Classes and Methods](#classes-and-methods)
+* [Properties](#properties)
+* [Delegates](#delegates)
+* [Localisation](#localisation)
+* [Constants](#constants)
+* [Initialization](#initialization)
+* [Conditionals](#conditionals)
+* [Future Revisions](#future-revisions)
 
 ## Xcode Project
 * The underlining file and folder system should match the project structure inside of Xcode. If a group is created in Xcode an underlining folder should exist in the same place on the file system.
@@ -38,6 +38,7 @@ The guide does not aim to define an applications architecture or any implementat
 
 * Image files should be descriptive of their screen function but should avoid visually describing their look. Filenames should be all lower case and spaces in file names should be replaced with hyphens.
 
+**Example**
 ```obj
 login-button@2x.png
 clear-menu-list-icon@2x.png
@@ -47,13 +48,14 @@ clear-menu-list-icon@2x.png
 
 * XIB files should not have “Controller” as part of their file name but can optionally include “View” or “Window”.
 
+**Example**
 ```objc
 LoginView.xib
 Register.xib
 ```
-
 * All class file names should start with a capital letter, along with all Xibs and Storyboard files.
 
+**Example**
 ```objc
 LoginViewController.m
 WebServiceInterface.h
@@ -61,12 +63,14 @@ WebServiceInterface.h
 
 * Projects should use the bundle ID in the format of com.boldrocket.[Client][Programme][Project] this helps keep naming conventions consistent across the provisioning portal.
 
+**Example**
 ```objc
 com.boldrocket.XYZGlobalProgrammeLocalProject
 ```
 
 * For frameworks and reusable classes class level prefixes should be used to avoid collisions – as per [Apple guidelines](https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html) 3 letters or more should be used for 3rd party libraries.
 
+**Example**
 ```objc
 BRTLoginViewController.m
 RDNUrlCache.m
@@ -77,9 +81,10 @@ RDNUrlCache.m
 
 * Avoid `#import`ing in header files unless explicitly required. Instead opt for forward class declaration via `@class`. This leads to [cleaner headers and faster compile times](http://qualitycoding.org/file-dependencies/). The `@class` reference should be declared below the `#import` statements but above the `@interface` statement with a blank line separating each category.
 
+**Example**
 ```objc
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
+ #import <UIKit/UIKit.h>
+ #import <Foundation/Foundation.h>
 
  @class MBProgressHUD; 
 
@@ -88,18 +93,20 @@ RDNUrlCache.m
 
 * Always import framework headers first, followed by a blank line and then the class specific imports.
 
+**Example**
 ```objc
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
+ #import <UIKit/UIKit.h>
+ #import <Foundation/Foundation.h>
+ #import <CoreLocation/CoreLocation.h>
  
  #import "LoginViewController.h"
-#import "IntroductionViewController.h"
+ #import "IntroductionViewController.h"
 ```
 
 ## Implementation Organisation
 * Conditional and loop bracing should start on the same line and end on a new line.
 
+**Example**
 ```objc
 if (user.isLoggedIn) {
 ...
@@ -108,6 +115,7 @@ if (user.isLoggedIn) {
 
 * Method level braces should always be on included on their own line.
 
+**Example**
 ```objc
  - (IBAction)submitLoginCredentials:(UIButton *)sender
 {
@@ -117,6 +125,7 @@ if (user.isLoggedIn) {
 
 * Always use braces for if / for / while / else etc. statements. Readability and consistency are a fair trade-off in all cases, even in the case of early returns.
 
+**Example**
 ```objc
 if (!user.isValid) {
 ...
@@ -130,6 +139,7 @@ if (!user.isValid) {
  * Protocols – named individually by their class name
  * Private / Utility – For any private methods and class specific utility methods
 
+**Example**
 ```objc
 #pragma mark – Lifecycle
 
@@ -176,6 +186,7 @@ if (!user.isValid) {
 
 * Use method returns early to help keep conditional logic clear.
 
+**Example**
 ```objc
 if (!user.isValid) {
     return;
@@ -186,6 +197,7 @@ if (!user.isValid) {
 
 * There should only be a one line space between methods for consistency as well as a one line space between the final method brace and the `@end` directive.
 
+**Example**
 ```objc
 - (void)hideAdditionalTextFields
 {
@@ -201,6 +213,8 @@ if (!user.isValid) {
 ```
 
 * Method declarations should always have a space after the class vs instance indicator (-/+).
+
+**Example**
 ```objc
 + (void)registerForPushNotifications;
 - (void)clearDefaultRequestParameters;
@@ -210,7 +224,6 @@ if (!user.isValid) {
 * All Objective-C primitive types should be used over their C counterpart where available - this aids in future proofing code.
 
 * `NSInteger` and `NSUInteger` should be used over int, the only exception is for loop indices.
-
 ```objc
 for (int i = 0; i < 10; i++) {
 ...
@@ -224,6 +237,7 @@ for (int i = 0; i < 10; i++) {
 ## Variables
 * Variable names should always be camel cased with the first letter lowercase and the pointer prefixing the variable name.
 
+**Example**
 ```objc
 NSString *firstName;
 NSString *lastName;
@@ -234,6 +248,7 @@ UIColor *configuredColorForView;
 
 * When declaring `IBOutlet` the variable name should also be suffixed with the control type - this avoids issues with ambiguity when referencing the object later.
 
+**Example**
 ```objc
 self.usernameTextField.text = @"Chuck Norris";
 [self.loginFormScrollView setContentOffset:aPoint animated:YES];
@@ -241,6 +256,7 @@ self.usernameTextField.text = @"Chuck Norris";
 
 * Use appropriate prefixes when working with typedef structures
 
+**Example**
 ```objc
 typedef enum {     
     BRTLoginStyleLight,     
@@ -251,6 +267,7 @@ typedef enum {
 ## Classes and Methods
 * All View Controllers class names should be suffixed with ViewController.
 
+**Example**
 ```objc
 LoginViewController.m
 RegisterViewController.m
@@ -258,6 +275,7 @@ RegisterViewController.m
 
 * Class factory methods should be created where relevant, in-line with Apple’s recommendation and best practices. This aids and simplifies the process of object creation by the client.
 
+**Example**
 ```objc
 + (id)dateWithTimeIntervalSinceNow:(NSTimeInterval)secs;
 + (id)userWithFirstName:(NSString *)firstName lastName:(NSString *)lastName; 
@@ -265,6 +283,7 @@ RegisterViewController.m
 
 * When invoking multiple methods on a single object limit to a maximum of 2 for readability and make sure there’s a space between each call.
 
+**Example**
 ```objc
 [DataManager sharedInstance] fetchFriends];
 ```
@@ -274,6 +293,7 @@ RegisterViewController.m
 
 * Dot-notation should be used to access and mutate properties.
 
+**Example**
 ```objc
 user.firstName = @”John”;
 [DataManager sharedInstance].clientId;
@@ -281,6 +301,7 @@ user.firstName = @”John”;
 
 * Nonatomic first, for consistency.
 
+**Example**
 ```objc
 @property (nonatomic, strong) MPHostServiceBrowser *serviceBrowser;
 @property (nonatomic, strong) NSMutableArray *connectionList;
@@ -288,6 +309,7 @@ user.firstName = @”John”;
 
 * If values need to be set on a readonly property declared in a header file declare the property with the readwrite attribute in the .m file.
 
+**Example**
 ```objc
 @property (nonatomic, strong, readwrite) NSString *userId;
 ```
@@ -297,6 +319,7 @@ user.firstName = @”John”;
 
 * Access collection literals using the short syntax and the mutable counterpart using the family of `objectAtIndex` methods. This makes it clear what type of collection is being accessed.
 
+**Example**
 ```objc
 NSString *user = self.userList[0]; 
 NSString *user = [self.userList objectAtIndex:0];
@@ -307,6 +330,7 @@ NSString *user = [self.userList objectAtIndex:0];
 ## Delegates
 * When defining `delegate` callbacks the format should be in line with the standard UIKit conventions which starts with the object responsible for the delegation, the auxiliary verb (will/should/did/has/should) and the event.
 
+**Example**
 ```objc
 scrollViewDidScroll:
 webView:shouldStartLoadWithRequest:navigationType:
@@ -317,25 +341,27 @@ webView:shouldStartLoadWithRequest:navigationType:
 ## Localisation
 * For apps across regions use NSLocalized string for all user displayed string output. You may optionally choose to use them in non-regional if also required because of the [flexibility it provides](http://nshipster.com/nslocalizedstring/).
 
+**Example**
 ```objc
-textField.placeholder = NSLocalizedString(@"Username", “Username Placeholder”);
+textField.placeholder = NSLocalizedString(@"Username", "Username Placeholder");
 ```
 
 ## Constants
 * Opt to declare constants in `.h` & `.m` files as `static` constants and not `#define` – this should also include a header reference where relevant.
 
+**Example**
 ```objc
 // .h 
 extern NSString * const BRTRootUrl;
 
 // .m
-static NSString * const BRTRootUrl = @" http://www.boldrocket.com/";  
+static NSString * const BRTRootUrl = @"http://www.boldrocket.com/";  
 ```
-
 
 ## Initialization
 * For common initializers always use commonInit, this should be consistent across all relevant classes within the project.
 
+**Example**
 ```objc
 - (void)commonInit 
 { 
@@ -344,24 +370,25 @@ static NSString * const BRTRootUrl = @" http://www.boldrocket.com/";
 
 - (id)initWithFrame:(CGRect)aRect 
 {     
-if ((self = [super initWithFrame:aRect])) {        
- [self commonInit];     
-} 
-return self; 
+    if ((self = [super initWithFrame:aRect])) {        
+        [self commonInit];     
+    } 
+    return self; 
 }  
 
 - (id)initWithCoder:(NSCoder*)coder 
 {     
-if ((self = [super initWithCoder:coder])) {         
-[self commonInit];     
-}     
-return self; 
+    if ((self = [super initWithCoder:coder])) {         
+        [self commonInit];     
+    }     
+    return self; 
 }
 ```
 
 ## Conditionals
 * Ternary operators should be kept to a maximum of 2 conditions.
 
+**Example**
 ```objc
 BOOL isUserActive = YES;
 result = isUserActive ? valueIfTrue : valueIfFalse;
@@ -373,4 +400,4 @@ While endeavouring to produce an initial version of the style guide it’s fully
 
 * instancetype vs id
 * CGRect functions vs direct CGRect access
-* Xcode Project Structuring
+* Xclode Project Structuring
