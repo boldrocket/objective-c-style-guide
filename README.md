@@ -188,11 +188,14 @@ if (!user.isValid) {
 
 **Example**
 ```objc
-if (!user.isValid) {
-    return;
-}
+- (void)processRequest
+{
+    if (!user.isValid) {
+        return;
+    }
 
-// continue with flow
+    // continue with flow
+}
 ```
 
 * There should only be a one line space between methods for consistency as well as a one line space between the final method brace and the `@end` directive.
