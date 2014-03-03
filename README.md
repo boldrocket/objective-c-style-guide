@@ -407,4 +407,4 @@ While endeavouring to produce an initial version of the style guide it’s fully
 
 * instancetype vs id
 * CGRect functions vs direct CGRect access
-* Xclode Project Structuring
+* Xcode Project Structuring
