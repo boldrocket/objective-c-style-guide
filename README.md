@@ -113,7 +113,7 @@ if (user.isLoggedIn) {
 }
 ```
 
-* Method level braces should always be on included on their own line.
+* Method level braces should always be included on their own line.
 
 **Example**
 ```objc
@@ -123,7 +123,7 @@ if (user.isLoggedIn) {
 }
 ```
 
-* Always use braces for if / for / while / else etc. statements. Readability and consistency are a fair trade-off in all cases, even in the case of early returns.
+* Always use braces for `if` / `for` / `while` / `else` etc. statements. Readability and consistency are a fair trade-off in all cases, even in the case of early returns.
 
 **Example**
 ```objc
@@ -133,7 +133,7 @@ if (!user.isValid) {
 ```
 
 * Use Pragma mark to separate method sets, the below set provides a breakdown of the default set which should be used, additional ones can be added as required.
-* Lifecyle – `viewDidLoad`, `init`, `dealloc` etc.
+ * Lifecyle – `viewDidLoad`, `init`, `dealloc` etc.
  * Public – All public methods required for the class to function.
  * Actions – `IBActions`
  * Protocols – named individually by their class name
@@ -215,7 +215,7 @@ if (!user.isValid) {
 @end
 ```
 
-* Method declarations should always have a space after the class vs instance indicator (-/+).
+* Method declarations should always have a space after the class vs instance indicator (`-`/`+`).
 
 **Example**
 ```objc
@@ -235,7 +235,7 @@ for (int i = 0; i < 10; i++) {
 
 * `CGFloat` should be used over float.
 
-* The auxiliary and additional types such as NSTimeInterval should be used (where relevant) over doubles.
+* The auxiliary and additional types such as `NSTimeInterval` should be used (where relevant) over doubles.
 
 ## Variables
 * Variable names should always be camel cased with the first letter lowercase and the pointer prefixing the variable name.
@@ -247,7 +247,11 @@ NSString *lastName;
 ```
 
 * Variables should be named verbosely in line with Apple’s conventions. *The only exception is for loop indices.
+
+**Example**
+```objc
 UIColor *configuredColorForView;
+```
 
 * When declaring `IBOutlet` the variable name should also be suffixed with the control type - this avoids issues with ambiguity when referencing the object later.
 
@@ -257,7 +261,7 @@ self.usernameTextField.text = @"Chuck Norris";
 [self.loginFormScrollView setContentOffset:aPoint animated:YES];
 ```
 
-* Use appropriate prefixes when working with typedef structures
+* Use appropriate prefixes when working with `typedef` structures
 
 **Example**
 ```objc
@@ -310,7 +314,7 @@ user.firstName = @”John”;
 @property (nonatomic, strong) NSMutableArray *connectionList;
 ```
 
-* If values need to be set on a readonly property declared in a header file declare the property with the readwrite attribute in the .m file.
+* If values need to be set on a `readonly` property declared in a header file declare the property with the `readwrite` attribute in the .m file.
 
 **Example**
 ```objc
@@ -362,7 +366,7 @@ static NSString * const BRTRootUrl = @"http://www.boldrocket.com/";
 ```
 
 ## Initialization
-* For common initializers always use commonInit, this should be consistent across all relevant classes within the project.
+* For common initializers always use a method named `commonInit`, this should be used consistently across all relevant classes within the project.
 
 **Example**
 ```objc
@@ -389,7 +393,7 @@ static NSString * const BRTRootUrl = @"http://www.boldrocket.com/";
 ```
 
 ## Conditionals
-* Ternary operators should be kept to a maximum of 2 conditions.
+* If preference permits opt to use an `if` / `else` statement over a ternary operator, the syntax is more explicit and in-line with Objective-C's more verbose syntax. **If** the ternary operator is used it should be kept to a maximum of 2 conditions. 
 
 **Example**
 ```objc
