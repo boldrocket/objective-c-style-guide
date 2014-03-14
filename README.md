@@ -134,7 +134,7 @@ if (!user.isValid) {
 
 * Use Pragma mark to separate method sets, the below set provides a breakdown of the default set which should be used, additional ones can be added as required.
  * Lifecyle – `viewDidLoad`, `init`, `dealloc` etc.
- * Navigation – For links to other Views ? Storyboards.
+ * Navigation – For links to other Views / Storyboards - `prepareForSegue`, `performSegue` etc.
  * Public – All public methods required for the class to function.
  * Actions – `IBActions`
  * Protocols – named individually by their class name
@@ -150,6 +150,7 @@ if (!user.isValid) {
 }
 
 #pragma mark - Navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 ...
