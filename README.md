@@ -34,6 +34,18 @@ The guide does not aim to define an applications architecture or any implementat
 ## Xcode Project
 * The underlining file and folder system should match the project structure inside of Xcode. If a group is created in Xcode an underlining folder should exist in the same place on the file system.
 
+* The Xcode project structure should be taken on a case by case basis but for "larger" projects a base project should include the following:
+ * Controls _(buttons, customised navigation controllers etc.)_
+ * User Journey _(functional view controllers & views)_
+ * Data Access _(object models, import routines, persistence stack etc.)_
+ * Web Service _(configuration, end point definition, base request / response handlers etc.)_
+ * Models _(plain old objects, business objects, data objects etc.)_
+ * Utilities _(class categories, utility classes etc.)_
+ * Resources _(fonts, pdfs etc.)_
+ * Xcassets _(images)_
+ * Reference Data _(json files, csv etc.)_
+ * Vendor _(3rd party code, frameworks, libraries)_
+
 * Xcassets, where available, should be used to manage image assets.
 
 * Image files should be descriptive of their screen function but should avoid visually describing their look. Filenames should be all lower case and spaces in file names should be replaced with hyphens.
@@ -77,16 +89,22 @@ RDNUrlCache.m
 ```
 
 ## Header Organisation
-* Avoid declaring methods in the header which are not publicly required
+* Avoid declaring methods in the header which are not publicly required.
+
+* Set `IBOutlets` in the header file, this makes referencing easy and consistent.
 
 * Avoid `#import`ing in header files unless explicitly required. Instead opt for forward class declaration via `@class`. This leads to [cleaner headers and faster compile times](http://qualitycoding.org/file-dependencies/). The `@class` reference should be declared below the `#import` statements but above the `@interface` statement with a blank line separating each category.
+
+* Constants should always be set between `#import` (below `@class`) and `@interface`.
 
 **Example**
 ```objc
  #import <UIKit/UIKit.h>
  #import <Foundation/Foundation.h>
 
- @class MBProgressHUD; 
+ @class MBProgressHUD;
+ 
+ extern NSString * const kLoginReference;
 
  @interface LoginViewController : UIViewController
 ```
@@ -104,6 +122,29 @@ RDNUrlCache.m
 ```
 
 ## Implementation Organisation
+* Constants and `typdef` should always be set between `#import` and `@implementation` references.
+
+* All definitions stored at the top of the implementation file should be logically grouped together and consistent, with a single line between each "block".
+
+**Example**
+```objc
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
+NSString * const kkLoginReference = @"loginRef";
+NSString * const kLogoutReference = @"logoutRef";
+
+typedef void (^BRLoginStatusBlock)(BRLoginStatus status);
+
+typedef enum {     
+    BRTLoginStyleLight,     
+    BRTLoginStyleDark 
+} BRTLoginStyle;
+ 
+@implementation LoginViewController
+```
+
 * Conditional and loop bracing should start on the same line and end on a new line.
 
 **Example**
@@ -383,7 +424,7 @@ static NSString * const BRTRootUrl = @"http://www.boldrocket.com/";
     // Common init code here!
 }  
 
-- (id)initWithFrame:(CGRect)aRect 
+- (instancetype)initWithFrame:(CGRect)aRect 
 {     
     if ((self = [super initWithFrame:aRect])) {        
         [self commonInit];     
@@ -391,7 +432,7 @@ static NSString * const BRTRootUrl = @"http://www.boldrocket.com/";
     return self; 
 }  
 
-- (id)initWithCoder:(NSCoder*)coder 
+- (instancetype)initWithCoder:(NSCoder*)coder 
 {     
     if ((self = [super initWithCoder:coder])) {         
         [self commonInit];     
@@ -413,6 +454,4 @@ result = isUserActive ? valueIfTrue : valueIfFalse;
 
 While endeavouring to produce an initial version of the style guide it’s fully expected this will be require further revisions going forward, below highlighted is discussion points for potential inclusion at a future date.
 
-* instancetype vs id
 * CGRect functions vs direct CGRect access
-* Xcode Project Structuring
