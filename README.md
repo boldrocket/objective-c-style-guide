@@ -392,7 +392,7 @@ scrollViewDidScroll:
 webView:shouldStartLoadWithRequest:navigationType:
 ```
 
-* `Delegate` / `Data Sources` should be declared explicitly in code, rather than through Interface Builder. Delegates should be declared together in an associated “setup” method. This is useful as you’re likely to spend more time in code than interface builder so debugging can be performed more conveniently.
+* `Delegate` / `Data Sources` can be declared in either code or `Interface Builder`, however the approach which is taken should be used consistently throughout the lifetime of the `ViewController` to avoid a mix and match of the two, which leads to confusion when debugging. For example if an `IBOutlet` has its `delegate` declared in `Interface Builder` then all other relevant objects should have their `delegates` set in `Interface Builder` too. `Interface Builder` objects which have their `delegate` declared in code should have these bundled together in an associated “setup” method.
 
 ## Localisation
 * For apps across regions use NSLocalized string for all user displayed string output. You may optionally choose to use them in non-regional if also required because of the [flexibility it provides](http://nshipster.com/nslocalizedstring/).
